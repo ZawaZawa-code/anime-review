@@ -6,11 +6,6 @@
 </head>
 <body>
     <h1>アニメレビューサイト</h1>
-    <p>Laravelで作成中です</p>
-    @foreach($animes as $anime)
-        <h2>{{ $anime->title }}</h2>
-        <p>{{ $anime->review }}</p>
-        <p>{{ $anime->score }}</p>
-    @endforeach
+    <a href="/2026-winter"><button>2026冬アニメ</button></a>
 </body>
 </html>

@@ -2,19 +2,19 @@
 
 <form method="POST" action="/anime/store">
     @csrf
-    <div>
-        <label>タイトル</label>
-        <input type="text" name="title">
+    <div style="margin-bottom: 10px;">
+        <label>タイトル</label><br>
+        <input type="text" name="title" style="width: 400px;">
     </div>
 
-    <div>
-        <label>レビュー</label>
-        <textarea name="review"></textarea>
+    <div style="margin-bottom: 10px;">
+        <label>レビュー</label><br>
+        <textarea name="review" rows="10" style="width: 400px; font-size: 16px;"></textarea>
     </div>
 
-    <div>
-        <label>点数</label>
-        <input type="number" name="score">
+    <div style="margin-bottom: 10px;">
+        <label>点数</label><br>
+        <input type="number" name="score" style="width: 100px;">
     </div>
 
     <button type="submit">保存</button>

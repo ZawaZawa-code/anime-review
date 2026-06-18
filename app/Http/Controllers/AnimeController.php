@@ -28,4 +28,18 @@ class AnimeController extends Controller
 
         return redirect('/');
     }
+
+    public function winter2026()
+    {
+        $animes = Anime::all();
+        return view('winter2026', compact('animes'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $anime = Anime::findOrFail($id);
+        $anime->review = $request->review;
+        $anime->save();
+        return redirect('/2026-winter');
+    }
 }

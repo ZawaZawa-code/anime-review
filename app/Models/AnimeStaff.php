@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Anime extends Model
+class AnimeStaff extends Model
 {
     protected $fillable = [
-        'title',
-        'season',
-        'synopsis',
+        'anime_id',
+        'episode_info_id',
+        'role',
+        'name',
     ];
 }

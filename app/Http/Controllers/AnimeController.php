@@ -22,8 +22,8 @@ class AnimeController extends Controller
     {
         Anime::create([
             'title' => $request->title,
-            'review' => $request->review,
-            'score' => $request->score,
+            'season' => $request->season,
+            'synopsis' => $request->synopsis,
         ]);
 
         return redirect('/');

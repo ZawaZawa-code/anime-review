@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Anime;
+use App\Models\EpisodeInfo;
 
 class AnimeController extends Controller
 {
     public function index()
     {
-        $animes = Anime::all();
-
-        return view('index', compact('animes'));
+        return view('index');
     }
+
     public function create()
     {
         return view('create');
@@ -25,21 +25,49 @@ class AnimeController extends Controller
             'season' => $request->season,
             'synopsis' => $request->synopsis,
         ]);
-
         return redirect('/');
     }
 
-    public function winter2026()
+    public function edit($id)
     {
-        $animes = Anime::all();
-        return view('winter2026', compact('animes'));
+        $anime = Anime::findOrFail($id);
+        return view('anime.edit', compact('anime'));
     }
 
     public function update(Request $request, $id)
     {
         $anime = Anime::findOrFail($id);
-        $anime->review = $request->review;
+        $anime->title = $request->title;
+        $anime->season = $request->season;
+        $anime->synopsis = $request->synopsis;
         $anime->save();
-        return redirect('/2026-winter');
+
+        $episodeId = $request->episode_id;
+        if ($episodeId && $episodeId !== 'all') {
+            return redirect('/anime/' . $id . '?episode=' . $episodeId);
+        }
+        return redirect('/anime/' . $id);
     }
+
+    public function winter2026()
+    {
+        $animes = Anime::with('episodeInfos')->get();
+        return view('winter2026', compact('animes'));
+    }
+
+    public function show($id)
+    {
+        $anime = Anime::with('episodeInfos')->findOrFail($id);
+        return view('anime.show', compact('anime'));
+    }
+
+    public function updateEpisodeInfo(Request $request, $id)
+    {
+        $episodeInfo = EpisodeInfo::findOrFail($id);
+        $episodeInfo->subtitle = $request->subtitle;
+        $episodeInfo->synopsis = $request->synopsis;
+        $episodeInfo->save();
+        return redirect('/anime/' . $episodeInfo->anime_id . '?episode=' . $episodeInfo->id);
+    }
+
 }

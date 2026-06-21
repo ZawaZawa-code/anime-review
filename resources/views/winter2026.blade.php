@@ -10,9 +10,7 @@
     <a href="/anime/create"><button>＋ 作品を追加</button></a>
 
     @foreach($animes as $anime)
-        <h2>{{ $anime->title }}</h2>
-        <p>{{ $anime->season }}</p>
-        <p style="border: 1px solid black; padding: 10px; width: 50%;">{!! nl2br(e($anime->synopsis)) !!}</p>
+        <h2><a href="/anime/{{ $anime->id }}">{{ $anime->title }}</a></h2>
     @endforeach
 
 </body>

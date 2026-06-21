@@ -11,4 +11,9 @@ class Anime extends Model
         'season',
         'synopsis',
     ];
+
+    public function episodeInfos()
+    {
+        return $this->hasMany(EpisodeInfo::class);
+    }
 }

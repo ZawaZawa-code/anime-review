@@ -31,15 +31,15 @@ class ReviewController extends Controller
     }
 
     // 話数ごとのレビュー投稿
-    public function storeEpisodeReview(Request $request)
+    public function storeEpisodeReview(Request $request, $id)
     {
         EpisodeReview::create([
-            'episode_info_id' => $request->episode_info_id,
-            'user_id' => $request->user_id,
+            'episode_info_id' => $id,
+            'user_id' => auth()->id(),
             'review' => $request->review,
             'score' => $request->score,
         ]);
-        return redirect('/2026-winter');
+        return redirect()->back();
     }
 
     // 話数ごとのレビュー更新
@@ -49,6 +49,6 @@ class ReviewController extends Controller
         $review->review = $request->review;
         $review->score = $request->score;
         $review->save();
-        return redirect('/2026-winter');
+        return redirect('/anime/' . $review->episodeInfo->anime_id . '?review=' . $review->episode_info_id . '#review-area-' . $review->episode_info_id);
     }
 }

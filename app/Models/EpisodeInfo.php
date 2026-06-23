@@ -12,4 +12,9 @@ class EpisodeInfo extends Model
         'subtitle',
         'synopsis',
     ];
+
+    public function episodeReviews()
+    {
+        return $this->hasMany(EpisodeReview::class);
+    }
 }

@@ -12,4 +12,14 @@ class EpisodeReview extends Model
         'review',
         'score',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function episodeInfo()
+    {
+        return $this->belongsTo(EpisodeInfo::class);
+    }
 }

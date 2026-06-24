@@ -33,13 +33,16 @@ class ReviewController extends Controller
     // 話数ごとのレビュー投稿
     public function storeEpisodeReview(Request $request, $id)
     {
-        EpisodeReview::create([
+        $review = EpisodeReview::create([
             'episode_info_id' => $id,
             'user_id' => auth()->id(),
             'review' => $request->review,
             'score' => $request->score,
         ]);
-        return redirect()->back();
+
+        $animeId = $review->episodeInfo->anime_id;
+
+        return redirect('/anime/' . $animeId . '?review=' . $id . '#review-area-' . $id);
     }
 
     // 話数ごとのレビュー更新
